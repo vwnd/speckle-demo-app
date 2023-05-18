@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
 
-const SPECKLE_CHALLENGE_KEY = 'SpeckleDemoApp.Challenge'
-const SPECKLE_AUTH_TOKEN_KEY = 'SpeckleDemoApp.AuthToken'
-const SPECKLE_AUTH_REFRESH_TOKEN_KEY = 'SpeckleDemoApp.AuthRefreshToken'
+export const SPECKLE_CHALLENGE_KEY = 'SpeckleDemoApp.Challenge'
+export const SPECKLE_AUTH_TOKEN_KEY = 'SpeckleDemoApp.AuthToken'
+export const SPECKLE_AUTH_REFRESH_TOKEN_KEY = 'SpeckleDemoApp.AuthRefreshToken'
 
 interface State {
   user: any | null
