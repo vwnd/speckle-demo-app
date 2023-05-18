@@ -1,3 +1,5 @@
+import { SpeckleGraphQLClient } from '@/graphql/client'
+import { userInfoQuery } from '@/graphql/queries/user-info'
 import { defineStore } from 'pinia'
 
 export const SPECKLE_CHALLENGE_KEY = 'SpeckleDemoApp.Challenge'
@@ -5,7 +7,13 @@ export const SPECKLE_AUTH_TOKEN_KEY = 'SpeckleDemoApp.AuthToken'
 export const SPECKLE_AUTH_REFRESH_TOKEN_KEY = 'SpeckleDemoApp.AuthRefreshToken'
 
 interface State {
-  user: any | null
+  user: {
+    email: string
+    name: string
+    company?: string
+    bio?: string
+    avatar?: string
+  } | null
 }
 
 export const useStore = defineStore('store', {
@@ -52,6 +60,10 @@ export const useStore = defineStore('store', {
         localStorage.setItem(SPECKLE_AUTH_REFRESH_TOKEN_KEY, data.refreshToken)
       }
       return data
+    },
+    async getUser() {
+      const { data } = await SpeckleGraphQLClient.query(userInfoQuery, {})
+      this.user = data.activeUser
     }
   }
 })
