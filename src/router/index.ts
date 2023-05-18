@@ -15,6 +15,8 @@ const router = createRouter({
           const accessCode = to.query.access_code as string
           await store.exchangeAccessCode(accessCode)
           await store.getUser()
+        } else {
+          await store.restoreSession()
         }
         next()
       }

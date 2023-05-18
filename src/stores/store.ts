@@ -64,6 +64,12 @@ export const useStore = defineStore('store', {
     async getUser() {
       const { data } = await SpeckleGraphQLClient.query(userInfoQuery, {})
       this.user = data.activeUser
+    },
+    async restoreSession() {
+      const token = localStorage.getItem(SPECKLE_AUTH_TOKEN_KEY)
+      if (token) {
+        await this.getUser()
+      }
     }
   }
 })
