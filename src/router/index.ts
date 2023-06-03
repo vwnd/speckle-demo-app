@@ -1,6 +1,15 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, type NavigationGuard } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import { useStore } from '@/stores/store'
+
+const requiresAuthGuard: NavigationGuard = async (to, from, next) => {
+  const store = useStore()
+  await store.restoreSession()
+  if (store.isAuthenticated) {
+    next()
+  }
+  next('/')
+}
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,7 +34,8 @@ const router = createRouter({
     {
       path: '/streams',
       name: 'streams',
-      component: () => import('@/views/StreamsView.vue')
+      component: () => import('@/views/StreamsView.vue'),
+      beforeEnter: requiresAuthGuard
     }
   ]
 })
