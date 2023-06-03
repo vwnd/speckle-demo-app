@@ -1,9 +1,11 @@
 <template>
-  <div>
-    <h1>StreamsView</h1>
+  <header class="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+    <h1 class="text-3xl font-bold leading-tight tracking-tight text-gray-900">Streams</h1>
+  </header>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col space-y-8">
     <StreamSearchBar v-model="searchQuery" />
     <StreamGrid :streams="streams" :error="error" :fetching="fetching" />
-  </div>
+  </main>
 </template>
 
 <script setup lang="ts">

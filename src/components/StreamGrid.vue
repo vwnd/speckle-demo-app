@@ -1,14 +1,16 @@
 <template>
-  <div v-if="fetching">Loading...</div>
-  <div v-if="error">{{ error }}</div>
-  <div class="grid grid-cols-3 gap-4">
-    <StreamGridItem
-      v-for="stream in streams"
-      :key="stream.id"
-      :id="stream.id"
-      :name="stream.name"
-      :commits-count="stream.commitsCount"
-    />
+  <div class="border p-8 rounded-lg">
+    <div v-if="fetching" class="flex text-gray-600 justify-center text-sm">Loading...</div>
+    <div v-if="error" class="flex text-red-600 justify-center text-sm">{{ error.message }}</div>
+    <div class="grid grid-cols-3 gap-4">
+      <StreamGridItem
+        v-for="stream in streams"
+        :key="stream.id"
+        :id="stream.id"
+        :name="stream.name"
+        :commits-count="stream.commitsCount"
+      />
+    </div>
   </div>
 </template>
 
