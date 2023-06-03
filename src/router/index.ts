@@ -21,6 +21,11 @@ const router = createRouter({
         }
         next()
       }
+    },
+    {
+      path: '/streams',
+      name: 'streams',
+      component: () => import('@/views/StreamsView.vue')
     }
   ]
 })

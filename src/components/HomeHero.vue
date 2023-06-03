@@ -16,12 +16,13 @@
           for interoperability, automation and collaboration to deliver better, together.
         </p>
         <div class="mt-10 flex items-center justify-center gap-x-6">
-          <a
+          <button
             v-if="store.isAuthenticated"
-            href="#"
+            @click="router.push('/streams')"
             class="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >Get started</a
           >
+            Get started
+          </button>
           <button
             v-else
             @click="store.redirectToSpeckleAuthPage()"
@@ -37,8 +38,10 @@
 
 <script setup lang="ts">
 import { useStore } from '@/stores/store'
+import { useRouter } from 'vue-router'
 
 const store = useStore()
+const router = useRouter()
 
 const headline = store.isAuthenticated
   ? `Your first Speckle app, ${store.user?.name}`
