@@ -1,4 +1,5 @@
 <template>
+  <TheNavbar />
   <header class="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
     <h1 class="text-3xl font-bold leading-tight tracking-tight text-gray-900">Streams</h1>
   </header>
@@ -12,6 +13,7 @@
 import StreamGrid from '@/components/StreamGrid.vue'
 import type { StreamGridItemProps } from '@/components/StreamGridItem.vue'
 import StreamSearchBar from '@/components/StreamSearchBar.vue'
+import TheNavbar from '@/components/TheNavbar.vue'
 import { streamsQuery } from '@/graphql/queries/streams'
 import { useQuery } from '@urql/vue'
 import { ref, computed } from 'vue'
@@ -24,7 +26,7 @@ const { data, error, fetching } = useQuery({
 })
 
 const streams = computed<StreamGridItemProps[]>(() => {
-  if (!data) return []
+  if (!data.value) return []
   return data.value.streams.items.map((stream: any) => ({
     id: stream.id,
     name: stream.name,
